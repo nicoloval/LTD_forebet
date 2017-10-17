@@ -15,15 +15,20 @@ up_q = 5
 down_fav = 1
 up_fav = 3
 
-print(' Available lists of leagues \n key : [league acronyms]')
-for k in leagues:
-    print(k, leagues[k])
-
-key = 0
-while key not in list(leagues.keys()):
-    key = input('enter the league key u wanna play kiddo : ')
-    if key not in list(leagues.keys()):
-        print('try again kiddo')
+# command line arguments (if present)
+if len(sys.argv) == 2:
+    key = sys.argv[1]
+else:
+    key = 0
+    # print allowed leagues list
+    print(' Available lists of leagues \n key : [league acronyms]')
+    for k in leagues:
+        print(k, leagues[k])
+    # choose the allowed leagues to check
+    while key not in list(leagues.keys()):
+        key = input('enter the league key u wanna play kiddo : ')
+        if key not in list(leagues.keys()):
+            print('try again kiddo')
         
 allowed_leagues = leagues[key]
 
@@ -34,7 +39,6 @@ page = requests.get(html)
 soup = BeautifulSoup(page.content, 'html.parser')
 # day = soup.find(class_ = 'schema')
 # day = soup.find(class_='contentmiddle')
-
 # all matches have class tr_0 or tr_1
 # day_matches = day.find_all(class_ = ['tr_0','tr_1'])
 day_matches = soup.find_all(class_=['tr_0', 'tr_1'])
