@@ -6,7 +6,8 @@ leagues = {
            'big5': ['It1', 'Es1', 'Fr1', 'PR', 'De1', 'Nl1'],
            'arg': ['Ar1', 'Ar2', 'Ar3', 'Ar4'],
            'wcq': ['WCQ'],  # world cup qualifications
-           'cl': ['CL']  # champion's league
+           'cl': ['CL'],  # champion's league
+           'el': ['EL']
 }
 # bounds for draw quote:
 down_q = 3.4
@@ -29,12 +30,16 @@ else:
         key = input('enter the league key u wanna play kiddo : ')
         if key not in list(leagues.keys()):
             print('try again kiddo')
+        day = input('do you want today(o) or tomorrow(d) kiddo (o/d)')   
         
 allowed_leagues = leagues[key]
 
 # Web-scraping
-html = ('https://www.forebet.com/en/football-tips-and-predictions-for-today/'
-        'predictions-under-over-goals')
+if day == 'o':
+    html = ('https://www.forebet.com/en/football-tips-and-predictions-for-today/'
+            'predictions-under-over-goals')
+if day == 'd':
+    html = ('https://www.forebet.com/en/football-tips-and-predictions-for-tomorrow/under-over-25-goals')
 page = requests.get(html)
 soup = BeautifulSoup(page.content, 'html.parser')
 # day = soup.find(class_ = 'schema')
