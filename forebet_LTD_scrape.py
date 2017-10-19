@@ -30,7 +30,7 @@ if len(sys.argv) == 3:
     day = sys.argv[2]
 else:
     key = None
-    day = 'o'
+    day = None
     # print allowed leagues list and allowed days
     print(' Available lists of leagues \n key : [league acronyms]')
     for k in leagues:
