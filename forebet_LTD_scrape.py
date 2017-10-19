@@ -17,8 +17,9 @@ down_fav = 1
 up_fav = 3
 
 # command line arguments (if present)
-if len(sys.argv) == 2:
+if len(sys.argv) == 3:
     key = sys.argv[1]
+    day = sys.argv[2]
 else:
     key = 0
     # print allowed leagues list
