@@ -6,9 +6,17 @@ leagues = {
            'big5': ['It1', 'Es1', 'Fr1', 'PR', 'De1', 'Nl1'],
            'arg': ['Ar1', 'Ar2', 'Ar3', 'Ar4'],
            'wcq': ['WCQ'],  # world cup qualifications
-           'cl': ['CL'],  # champion's league
-           'el': ['EL']
+           'euro': ['CL', 'EL'],  # champion's league
+           'all': ['It1', 'Es1', 'Fr1', 'PR', 'De1', 'Nl1', 'CL', 'EL']
 }
+
+day_html = {'o': 'https://www.forebet.com/en/'
+            'football-tips-and-predictions-for-today/'
+            'predictions-under-over-goals',
+            'd': 'https://www.forebet.com/en/'
+            'football-tips-and-predictions-for-tomorrow/'
+            'under-over-25-goals'}
+
 # bounds for draw quote:
 down_q = 3.4
 up_q = 5
@@ -21,13 +29,15 @@ if len(sys.argv) == 3:
     key = sys.argv[1]
     day = sys.argv[2]
 else:
-    key = 0
-    # print allowed leagues list
+    key = None
+    day = 'o'
+    # print allowed leagues list and allowed days
     print(' Available lists of leagues \n key : [league acronyms]')
     for k in leagues:
         print(k, leagues[k])
-    # choose the allowed leagues to check
-    while key not in list(leagues.keys()):
+
+    # choose the allowed leagues and day to check
+    while key not in list(leagues.keys()) or day not in ['o', 'd']:
         key = input('enter the league key u wanna play kiddo : ')
         if key not in list(leagues.keys()):
             print('try again kiddo')
@@ -36,11 +46,7 @@ else:
 allowed_leagues = leagues[key]
 
 # Web-scraping
-if day == 'o':
-    html = ('https://www.forebet.com/en/football-tips-and-predictions-for-today/'
-            'predictions-under-over-goals')
-if day == 'd':
-    html = ('https://www.forebet.com/en/football-tips-and-predictions-for-tomorrow/under-over-25-goals')
+html = day_html[day]
 page = requests.get(html)
 soup = BeautifulSoup(page.content, 'html.parser')
 # day = soup.find(class_ = 'schema')
