@@ -4,11 +4,18 @@ import sys
 
 leagues = {
            'big5': ['It1', 'Es1', 'Fr1', 'PR', 'De1', 'Nl1'],
-           'arg': ['Ar1', 'Ar2', 'Ar3', 'Ar4'],
+           #  'arg': ['Ar1', 'Ar2', 'Ar3', 'Ar4'],
            'wcq': ['WCQ'],  # world cup qualifications
            'euro': ['CL', 'EL'],  # champion's league
-           'all': ['It1', 'Es1', 'Fr1', 'PR', 'De1', 'Nl1', 'CL', 'EL']
+           'cupz': ['DBF', 'EsC', 'EFL']
 }
+#  'all' key contains all the leagues in the other keys
+new = []
+for k in leagues.keys():
+    new = new + leagues[k]
+
+leagues['all'] = new
+
 
 day_html = {'o': 'https://www.forebet.com/en/'
             'football-tips-and-predictions-for-today/'
