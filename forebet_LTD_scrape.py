@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import sys
 
 leagues = {
-           'big5': ['It1', 'Es1', 'Fr1', 'PR', 'De1', 'Nl1'],
+           'big5': ['It1', 'Es1', 'Fr1', 'PR', 'De1', 'Nl1', 'Be1'],
            #  'arg': ['Ar1', 'Ar2', 'Ar3', 'Ar4'],
            'wcq': ['WCQ'],  # world cup qualifications
            'euro': ['CL', 'EL'],  # champion's league
@@ -25,7 +25,7 @@ day_html = {'o': 'https://www.forebet.com/en/'
             'under-over-25-goals'}
 
 # bounds for draw quote:
-down_q = 3.4
+down_q = 3.3
 up_q = 5
 # bounds for favourite team quote
 down_fav = 1
@@ -101,6 +101,9 @@ for match in day_matches:
                             & (draw_odd < up_q)
                             & (min(one_odd, two_odd) < up_fav)
                             & (min(one_odd, two_odd) > down_fav)):
-                        print(match_name)
+                        match_date = match.find(class_='date_bah').get_text()
+                        print(match_name,match_date)
                         print('1x2 odds : {}'.format(float_odds))
                         print('exp # scores : {}'.format(avg_score))
+
+print('\nGreat kid! Dont get cocky')
